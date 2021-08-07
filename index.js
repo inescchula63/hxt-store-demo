@@ -1,5 +1,6 @@
 const exp = require('constants');
 const cool = require('cool-ascii-faces');
+const bodyParser = require('body-parser')
 const express = require('express');
 const path = require('path');
 const PORT = process.env.PORT || 5000; //5000 or 5432
@@ -62,17 +63,14 @@ express()
     }
   });
   client.connect();
-  const result = client.query({
-    rowMode: 'array',
-    text: 'select * from hxtstorecap;',
-  })
-  client.query('SELECT NOW()', (err, res) => {
-      
+
+  client.query('select * from hxtstorecap;', (err, result) => {
+    res.send("show: "+ result+ "," + typeof(result) + "," + result.rows)
     console.log(err, res)
     client.end()
   })
-  res.send("show: "+ result+ "," + typeof(result) + "," + result.rows+" field = " + result.fields[0])
-  client.end()
+ 
+
   
 })
   .listen(PORT, () => console.log(`Listening on ${ PORT }`));
