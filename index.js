@@ -31,12 +31,13 @@ express()
     */
    
     //client.end();
-
+    x = ""
     client.query('SELECT NOW()', (err, res) => {
+      x = res
       console.log(err, res)
       client.end()
     })
-    res.send(result+ "," + typeof(result) + "," + result.rows)
+    res.send(result+ "," + typeof(result) + "," + result.rows+" x = " + x)
   
     
 })
