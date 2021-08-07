@@ -25,10 +25,10 @@ express()
     client.query('SELECT * FROM hxtstorecap;', (err, res) => {
       if (err) throw err;
       for (let row of res.rows) {
-        console.log(JSON.stringify(row));
-        res.send(client)
+        console.log(row);
+        
       }
-
+      res.send(client)
     
     client.end();
   
