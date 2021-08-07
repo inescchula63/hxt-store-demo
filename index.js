@@ -1,3 +1,4 @@
+const exp = require('constants');
 const cool = require('cool-ascii-faces');
 const express = require('express');
 const path = require('path');
@@ -11,7 +12,19 @@ express()
   .get('/cool', (req, res) => res.send(cool()))
   .get('/showbalance/:code', function(req, res) {
    const code = req.params.code
-   res.send('code: ' + code + ' and name: pending');
+   res.send('code: ' + code + ' and name: pending');})
+  .get('/testsql', function(req, res) {
+    const { Client } = require('pg');
+    const client = new Client({
+      connectionString: process.env.DATABASE_URL,
+      ssl: {
+        rejectUnauthorized: false
+      }
+    });
+    client.connect();
+    res.send(client)
+    client.end();
+  
+    
 })
-
   .listen(PORT, () => console.log(`Listening on ${ PORT }`));
