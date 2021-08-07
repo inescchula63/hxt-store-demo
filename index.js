@@ -23,7 +23,6 @@ express()
     });
     client.connect();
     const result = client.query('INSERT INTO hxtstorecap (Code, PartNo, Quantity) VALUES (\'ALP-COM-0-2\', \'test ALP3\',5);');
-    client.end()
    
     //client.end();
     x = client.query('SELECT NOW()', (err, res) => {
