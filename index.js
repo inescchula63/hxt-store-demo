@@ -26,13 +26,13 @@ express()
 
    
     //client.end();
-   /* x = client.query('SELECT NOW()', (err, res) => {
+    x = client.query('SELECT NOW()', (err, res) => {
       
       console.log(err, res)
-      
-    })*/
-    res.send(result+ "," + typeof(result) + "," + result.rows)
-    client.end()
+      client.end()
+    })
+    res.send(result+ "," + typeof(result) + "," + result.rows+" x = " + x)
+  
     
 })
   .listen(PORT, () => console.log(`Listening on ${ PORT }`));
