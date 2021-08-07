@@ -22,7 +22,7 @@ express()
       }
     });
     client.connect();
-    const result = client.query('SELECT * hxtstorecap');
+    const result = client.query('SELECT * From hxtstorecap;');
     /*
     client.query('INSERT INTO hxtstorecap (Code, PartNo, Quantity) VALUES (\'ALP-COM-0-2\', \'test ALP3\',5); ', (err, res) => {
       if (err) {
