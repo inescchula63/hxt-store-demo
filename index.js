@@ -29,8 +29,14 @@ express()
         console.log(err.stack)
       }
     */
+   
+    //client.end();
+
+    client.query('SELECT NOW()', (err, res) => {
+      console.log(err, res)
+      client.end()
+    })
     res.send(result+ "," + typeof(result) + "," + result.rows)
-    client.end();
   
     
 })
