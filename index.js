@@ -2,7 +2,7 @@ const exp = require('constants');
 const cool = require('cool-ascii-faces');
 const express = require('express');
 const path = require('path');
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5000; //5000 or 5432
 
 express()
   .use(express.static(path.join(__dirname, 'public')))
@@ -22,7 +22,14 @@ express()
       }
     });
     client.connect();
-    res.send(client)
+    client.query('SELECT * FROM hxtstorecap;', (err, res) => {
+      if (err) throw err;
+      for (let row of res.rows) {
+        console.log(JSON.stringify(row));
+        res.send(client)
+      }
+
+    
     client.end();
   
     
