@@ -65,7 +65,8 @@ express()
   client.connect();
 
   client.query('select * from hxtstorecap;', (err, result) => {
-    res.send("show: "+ result+ ",type :" + typeof(result) + ",rows 0 :" + result.rows[0]+", field :" + result.fields[0].name)
+    res.send("show: "+ result+ ",type :" + typeof(result) + ",type rows 0 :" + typeof( result.rows[0])+", field :" + result.fields[0].name
+    +" " + result.fields[1].name)
     //console.log(err, res)
     client.end()
   })
