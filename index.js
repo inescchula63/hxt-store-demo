@@ -23,12 +23,9 @@ express()
     });
     client.connect();
     client.query('SELECT * FROM hxtstorecap;', (err, res) => {
-      if (err) throw err;
-      for (let row of res.rows) {
-        console.log(row);
-        
-      }
-      res.send(client)
+    if (err) throw err;
+  
+    res.send(res.rows)
     
     client.end();
   
