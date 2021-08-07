@@ -62,16 +62,13 @@ express()
     }
   });
   client.connect();
-  const result = client.query('select * from hxtstorecap');
- 
-  //client.end();
-  x = client.query('SELECT NOW()', (err, res) => {
-    
-    console.log(err, res)
-    client.end()
+  const result = client.query({
+    rowMode: 'array',
+    text: 'select * from hxtstorecap;',
   })
-  res.send("show: "+ result+ "," + typeof(result) + "," + result.rows+" x = " + x)
 
+  res.send("show: "+ result+ "," + typeof(result) + "," + result.rows+" field = " + result.fields[0])
+  client.end()
   
 })
   .listen(PORT, () => console.log(`Listening on ${ PORT }`));
