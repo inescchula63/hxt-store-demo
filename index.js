@@ -31,9 +31,8 @@ express()
     */
    
     //client.end();
-    x = ""
-    client.query('SELECT NOW()', (err, res) => {
-      x = res
+    x = client.query('SELECT NOW()', (err, res) => {
+      
       console.log(err, res)
       client.end()
     })
