@@ -66,7 +66,11 @@ express()
     rowMode: 'array',
     text: 'select * from hxtstorecap;',
   })
-
+  client.query('SELECT NOW()', (err, res) => {
+      
+    console.log(err, res)
+    client.end()
+  })
   res.send("show: "+ result+ "," + typeof(result) + "," + result.rows+" field = " + result.fields[0])
   client.end()
   
