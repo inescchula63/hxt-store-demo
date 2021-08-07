@@ -29,7 +29,7 @@ express()
         console.log(err.stack)
       }
     */
-    res.send(result+ " " + typeof(result) + "," + result.rows)
+    res.send(result+ " " + typeof(result) + "," + result.rows[0])
     client.end();
   
     
