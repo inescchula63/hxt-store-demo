@@ -33,5 +33,45 @@ express()
     res.send(result+ "," + typeof(result) + "," + result.rows+" x = " + x)
   
     
+}).get('/testsql_addv2', function(req, res) {
+  const { Client } = require('pg');
+  const client = new Client({
+    connectionString: process.env.DATABASE_URL,
+    ssl: {
+      rejectUnauthorized: false
+    }
+  });
+  client.connect();
+ 
+  //client.end();
+  let result= client.query('INSERT INTO hxtstorecap (Code, PartNo, Quantity) VALUES (\'ALP-COM-0-2\', \'test ALP3_v2\',5);', (err, res) => {
+    
+    console.log(err, res)
+    client.end()
+  })
+  res.send("v2 :"+result+ "," + typeof(result) + "," + result.rows+" x = " + x)
+
+  
+})
+.get('/testsql_show', function(req, res) {
+  const { Client } = require('pg');
+  const client = new Client({
+    connectionString: process.env.DATABASE_URL,
+    ssl: {
+      rejectUnauthorized: false
+    }
+  });
+  client.connect();
+  const result = client.query('select * from hxtstorecap');
+ 
+  //client.end();
+  x = client.query('SELECT NOW()', (err, res) => {
+    
+    console.log(err, res)
+    client.end()
+  })
+  res.send("show: "+ result+ "," + typeof(result) + "," + result.rows+" x = " + x)
+
+  
 })
   .listen(PORT, () => console.log(`Listening on ${ PORT }`));
