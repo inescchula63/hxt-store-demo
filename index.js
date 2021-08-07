@@ -22,14 +22,14 @@ express()
       }
     });
     client.connect();
-    const result = client.query('select * from hxtstorecap;');
+    const result = client.query('INSERT INTO hxtstorecap (Code, PartNo, Quantity) VALUES (\'ALP-COM-0-2\', \'test ALP3\',5);');
     /*
     client.query('INSERT INTO hxtstorecap (Code, PartNo, Quantity) VALUES (\'ALP-COM-0-2\', \'test ALP3\',5); ', (err, res) => {
       if (err) {
         console.log(err.stack)
       }
     */
-    res.send(result+ " " + typeof(result) + "," + result.rows[0])
+    res.send(result+ "," + typeof(result) + "," + result.rows)
     client.end();
   
     
