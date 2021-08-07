@@ -22,12 +22,13 @@ express()
       }
     });
     client.connect();
-    /*client.query('SELECT * FROM hxtstorecap;', (err, res) => {
-    if (err) throw err;
-  
-    res.send(res.rows)
-    */
-   res.send('eiei')
+    client.query('SELECT * FROM hxtstorecap;', (err, res) => {
+      if (err) {
+        console.log(err.stack)
+      } else {
+        console.log(res.rows[0])
+      }
+    
     client.end();
   
     
