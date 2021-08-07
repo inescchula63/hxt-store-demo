@@ -22,11 +22,13 @@ express()
       }
     });
     client.connect();
+    /*
     client.query('INSERT INTO hxtstorecap (Code, PartNo, Quantity) VALUES (\'ALP-COM-0-2\', \'test ALP3\',5); ', (err, res) => {
       if (err) {
         console.log(err.stack)
       }
-    
+    */
+   res.send(client)
     client.end();
   
     
