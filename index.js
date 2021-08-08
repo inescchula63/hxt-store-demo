@@ -133,7 +133,8 @@ express()
   client.connect();
   const code = req.body.code;
   const partno = req.body.partno;
-  const quantity = req.body.quantity;
+  let quantity = parseInt(req.body.quantity);
+  if(Number.isNaN(quantity) ) quantity = 0
   res.send(quantity)
   client.query('INSERT INTO hxtstorecap (Code, PartNo, Quantity) VALUES ($1::text, $2::text,$3::int);',[code,partno,quantity], (err, result) => {
   //client.query('select * from hxtstorecap where code = \'ALP-COM-0-0\';', (err, result) => {
