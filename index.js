@@ -7,6 +7,7 @@ const PORT = process.env.PORT || 5000; //5000 or 5432
 
 express()
   .use(express.static(path.join(__dirname, 'public')))
+  .use(bodyParser.urlencoded({ extended: true }))
   .set('views', path.join(__dirname, 'views'))
   .set('view engine', 'ejs')
   .get('/', (req, res) => res.render('pages/index'))
@@ -130,15 +131,16 @@ express()
     }
   });
   client.connect();
-  client.query('INSERT INTO hxtstorecap (Code, PartNo, Quantity) VALUES (\'ALP-COM-0-2\', \'test ALP3\',5);', (err, result) => {
+  client.end()
+  /*client.query('INSERT INTO hxtstorecap (Code, PartNo, Quantity) VALUES (\'ALP-COM-0-2\', \'test ALP3\',5);', (err, result) => {
   //client.query('select * from hxtstorecap where code = \'ALP-COM-0-0\';', (err, result) => {
    // res.send("show: "+ result+ ",type :" + typeof(result) + ",Code :" + result.rows[0].code)
     //console.log(err, res)
     
     client.end()
-  })
-  res.sendFile('pages/test')
-
+  })*/
+  //res.sendFile('pages/test')
+  res.send('test' + req.body.code)
   
 })
   .listen(PORT, () => console.log(`Listening on ${ PORT }`));
