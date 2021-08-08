@@ -23,7 +23,10 @@ express()
   client.connect();
 
   client.query('select * from hxtstorecap where code = $1::text ;',[code], (err, result) => {
-
+  if(err){
+    res.send('Record not found')
+  }
+  else{
     res.send(
       `
       <style>
@@ -57,6 +60,7 @@ express()
       </table>
       `
     )
+      }
     client.end()
   })
 
