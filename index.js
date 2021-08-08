@@ -26,8 +26,25 @@ express()
 
     res.send(
       `
+      <style>
+        table {
+          font-family: arial, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+        }
+
+        td, th {
+          border: 1px solid #dddddd;
+          text-align: left;
+          padding: 8px;
+        }
+
+        tr:nth-child(even) {
+          background-color: #dddddd;
+        }
+        </style>
       <h2>Show HAXTER STORE Balance </h2>
-      <table style="border: 1px solid black">
+      <table>
         <tr>
           <th>Code</th>
           <th>Part no.</th>
