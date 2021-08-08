@@ -10,6 +10,7 @@ express()
   .set('views', path.join(__dirname, 'views'))
   .set('view engine', 'ejs')
   .get('/', (req, res) => res.render('pages/index'))
+  .get('/adddata', (req, res) => res.render('pages/test'))
   .get('/cool', (req, res) => res.send(cool()))
   .get('/showbalance/:code', function(req, res) {
    const code = req.params.code
