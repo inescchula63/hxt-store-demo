@@ -27,7 +27,38 @@ express()
     res.send('Record not found')
   }
   else if(result.rows.length == 0){
-    res.send('Record not found')
+    res.send(
+      `
+      <style>
+        table {
+          font-family: arial, sans-serif;
+          border-collapse: collapse;
+        }
+
+        td, th {
+          border: 1px solid #dddddd;
+          text-align: left;
+          padding: 8px;
+        }
+
+        tr:nth-child(even) {
+          background-color: #dddddd;
+        }
+        </style>
+      <h2>Show HAXTER STORE Balance </h2>
+      <table>
+        <tr>
+          <th>Code</th>
+          <th>Part no.</th>
+          <th>Quantity</th>
+        </tr>
+        <tr>
+          <td> Record not foundddddd!!!!! </td>
+         
+        </tr>
+      </table>
+      `
+    )
   }
   else{
     res.send(
