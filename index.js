@@ -133,15 +133,15 @@ express()
   client.connect();
   const code = req.body.code;
   const partno = req.body.partno;
-  let quantity = parseInt(req.body.quantity);
-  if( quantity = NaN ) {quantity = 0}
-  res.send(quantity)
+  var quantity = parseInt(req.body.quantity);
+  if( isNaN(quantity) ) quantity = 0;
+  //res.send(quantity)
   client.query('INSERT INTO hxtstorecap (Code, PartNo, Quantity) VALUES ($1::text, $2::text,$3::int);',[code,partno,quantity], (err, result) => {
     if(err){
       res.send('unsuccessfully insert data')
     }
     else{
-      res.send('successfully insert <br> Code: ' + JSON.stringify(code) )
+      res.send(`successfully insert <br> Code: ${code}, partno : ${partno}, quantity ${quantity} <br> `)
     }
     client.end()
   })
