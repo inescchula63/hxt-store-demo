@@ -24,7 +24,7 @@ express()
 
   client.query('select * from hxtstorecap where code = $1::text ;',[code], (err, result) => {
   if(err){
-    res.send('Record not found')
+    //res.send('Record not found')
   }
   else{
     res.send(
