@@ -23,10 +23,16 @@ express()
   client.connect();
 
   client.query('select * from hxtstorecap where code = $1::text ;',[code], (err, result) => {
-    res.send("show: "+ result+ ",type :" + typeof(result) + ",Code :" + result.rows[0].code)
-    //console.log(err, res)
+
+    res.send(
+      `Code ${result.rows[0].code} 
+       Part no. ${result.rows[0].partno}
+       Quantity  ${result.rows[0].quantity}
+      `
+    )
     client.end()
   })
+
   })
   .get('/testsql_add', function(req, res) {
     const { Client } = require('pg');
