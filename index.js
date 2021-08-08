@@ -27,7 +27,7 @@ express()
     res.send(
       `
       <h1>Show HAXTER STORE Balance </h>
-      <table>
+      <table style="width:100%">
         <tr>
           <th>Code</th>
           <th>Part no.</th>
