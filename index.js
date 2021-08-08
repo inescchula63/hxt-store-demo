@@ -137,7 +137,7 @@ express()
     
     client.end()
   })
-  res.render('pages/test')
+  res.sendFile('pages/test')
 
   
 })
