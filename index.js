@@ -25,9 +25,20 @@ express()
   client.query('select * from hxtstorecap where code = $1::text ;',[code], (err, result) => {
 
     res.send(
-      `Code ${result.rows[0].code} 
-       Part no. ${result.rows[0].partno}
-       Quantity  ${result.rows[0].quantity}
+      `
+      <h1>Show HAXTER STORE Balance </h>
+      <table>
+        <tr>
+          <th>Code</th>
+          <th>Part no.</th>
+          <th>Quantity</th>
+        </tr>
+        <tr>
+          <td>${result.rows[0].code} </td>
+          <td>${result.rows[0].partno}</td>
+          <td>${result.rows[0].quantity}</td>
+        </tr>
+      </table>
       `
     )
     client.end()
