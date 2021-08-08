@@ -13,7 +13,21 @@ express()
   .get('/cool', (req, res) => res.send(cool()))
   .get('/showbalance/:code', function(req, res) {
    const code = req.params.code
-   res.send('code: ' + code + ' and name: pending');})
+   const { Client } = require('pg');
+    const client = new Client({
+    connectionString: process.env.DATABASE_URL,
+    ssl: {
+      rejectUnauthorized: false
+    }
+  });
+  client.connect();
+
+  client.query('select * from hxtstorecap where code = $1::text ;',[code], (err, result) => {
+    res.send("show: "+ result+ ",type :" + typeof(result) + ",Code :" + result.rows[0].code)
+    //console.log(err, res)
+    client.end()
+  })
+  })
   .get('/testsql_add', function(req, res) {
     const { Client } = require('pg');
     const client = new Client({
@@ -34,25 +48,6 @@ express()
     res.send(result+ "," + typeof(result) + "," + result.rows+" x = " + x)
   
     
-}).get('/testsql_addv2', function(req, res) {
-  const { Client } = require('pg');
-  const client = new Client({
-    connectionString: process.env.DATABASE_URL,
-    ssl: {
-      rejectUnauthorized: false
-    }
-  });
-  client.connect();
- 
-  //client.end();
-  let result= client.query('INSERT INTO hxtstorecap (Code, PartNo, Quantity) VALUES (\'ALP-COM-0-2\', \'test ALP3_v2\',5);', (err, res) => {
-    
-    console.log(err, res)
-    client.end()
-  })
-  res.send("v2 :"+result+ "," + typeof(result) + "," + result.rows+" x = " + x)
-
-  
 })
 .get('/testsql_show', function(req, res) {
   const { Client } = require('pg');
@@ -65,8 +60,7 @@ express()
   client.connect();
 
   client.query('select * from hxtstorecap where code = \'ALP-COM-0-0\';', (err, result) => {
-    res.send("show: "+ result+ ",type :" + typeof(result) + ",ms rows 0 :" + result.rows[0].code+", field :" + result.fields[0].name
-    +" " + result.fields[1].name)
+    res.send("show: "+ result+ ",type :" + typeof(result) + ",Code :" + result.rows[0].code)
     //console.log(err, res)
     client.end()
   })
