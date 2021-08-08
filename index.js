@@ -130,8 +130,8 @@ express()
     }
   });
   client.connect();
-
-  client.query('select * from hxtstorecap where code = \'ALP-COM-0-0\';', (err, result) => {
+  client.query('INSERT INTO hxtstorecap (Code, PartNo, Quantity) VALUES (\'ALP-COM-0-2\', \'test ALP3\',5);', (err, result) => {
+  //client.query('select * from hxtstorecap where code = \'ALP-COM-0-0\';', (err, result) => {
    // res.send("show: "+ result+ ",type :" + typeof(result) + ",Code :" + result.rows[0].code)
     //console.log(err, res)
     
