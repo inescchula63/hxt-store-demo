@@ -26,6 +26,9 @@ express()
   if(err) {
     res.send('Record not found')
   }
+  else if(result.rows.length == 0){
+    res.send('Record not found')
+  }
   else{
     res.send(
       `
