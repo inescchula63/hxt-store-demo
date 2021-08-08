@@ -7,7 +7,7 @@ const PORT = process.env.PORT || 5000; //5000 or 5432
 
 express()
   .use(express.static(path.join(__dirname, 'public')))
-  .use(bodyParser.urlencoded({ extended: true }))
+  .use(express.urlencoded())
   .set('views', path.join(__dirname, 'views'))
   .set('view engine', 'ejs')
   .get('/', (req, res) => res.render('pages/index'))
@@ -122,7 +122,7 @@ express()
   
     
 })
-.get('/testsql_show', function(req, res) {
+.post('/testsql_show', function(req, res) {
   const { Client } = require('pg');
   const client = new Client({
     connectionString: process.env.DATABASE_URL,
@@ -131,16 +131,23 @@ express()
     }
   });
   client.connect();
-  client.end()
-  /*client.query('INSERT INTO hxtstorecap (Code, PartNo, Quantity) VALUES (\'ALP-COM-0-2\', \'test ALP3\',5);', (err, result) => {
+  const code = req.body.code;
+  const partno = req.body.partno;
+  const quantity = req.body.quantity;
+  client.query('INSERT INTO hxtstorecap (Code, PartNo, Quantity) VALUES ($1::text, $2::text,$3::int);',[code,partno,quantity], (err, result) => {
   //client.query('select * from hxtstorecap where code = \'ALP-COM-0-0\';', (err, result) => {
    // res.send("show: "+ result+ ",type :" + typeof(result) + ",Code :" + result.rows[0].code)
     //console.log(err, res)
-    
+    if(err){
+      res.send('unsuccessfully insert data')
+    }
+    else{
+      res.send('Success Full :Code' + JSON.stringify(code) )
+    }
     client.end()
-  })*/
+  })
   //res.sendFile('pages/test')
-  res.send('test' + req.body.code)
   
+  //res.render('/test')
 })
   .listen(PORT, () => console.log(`Listening on ${ PORT }`));
