@@ -213,7 +213,7 @@ express()
        background-color: #dddddd;
      }
      </style>
-   <h2>Show HAXTER STORE Balance </h2>
+   <h2>Show ALL HAXTER STORE Balance !!!!</h2>
    <table>
      <tr>
        <th>Code</th>
