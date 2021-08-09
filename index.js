@@ -220,14 +220,18 @@ express()
        <th>Part no.</th>
        <th>Quantity</th>
      </tr>
-     <tr>
+     
    `
      for(let i  = 0;i< result.rows.length  ; i++){
-      sendtext +=  `<td>${result.rows[i].code} </td>
-      <td>${result.rows[i].partno}</td>
-      <td>${result.rows[i].quantity}</td> `
+      sendtext +=  `
+      <tr>
+        <td>${result.rows[i].code} </td>
+        <td>${result.rows[i].partno}</td>
+        <td>${result.rows[i].quantity}</td>
+      </tr> 
+      `
      }
-     sendtext += ' </tr>   </table> '
+     sendtext += '</table> '
 
    res.send(sendtext)
      }
