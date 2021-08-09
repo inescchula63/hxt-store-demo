@@ -147,4 +147,92 @@ express()
   })
 
 })
+.get('/showallrecord', function(req, res) {
+  const { Client } = require('pg');
+   const client = new Client({
+   connectionString: process.env.DATABASE_URL,
+   ssl: {
+     rejectUnauthorized: false
+   }
+ });
+ client.connect();
+
+ client.query('select * from hxtstorecap;', (err, result) => {
+ if(err) {
+   res.send('Record not found')
+ }
+ else if(result.rows.length == 0){
+   res.send(
+     `
+     <style>
+       table {
+         font-family: arial, sans-serif;
+         border-collapse: collapse;
+       }
+
+       td, th {
+         border: 1px solid #dddddd;
+         text-align: left;
+         padding: 8px;
+       }
+
+       tr:nth-child(even) {
+         background-color: #dddddd;
+       }
+       </style>
+     <h2>Show HAXTER STORE Balance </h2>
+     <table>
+       <tr>
+         <th>Code</th>
+         <th>Part no.</th>
+         <th>Quantity</th>
+       </tr>
+       <tr>
+         <td> Record not foundddddd!!!!! </td>
+        
+       </tr>
+     </table>
+     `
+   )
+ }
+ else{
+   sendtext =  `
+   <style>
+     table {
+       font-family: arial, sans-serif;
+       border-collapse: collapse;
+     }
+
+     td, th {
+       border: 1px solid #dddddd;
+       text-align: left;
+       padding: 8px;
+     }
+
+     tr:nth-child(even) {
+       background-color: #dddddd;
+     }
+     </style>
+   <h2>Show HAXTER STORE Balance </h2>
+   <table>
+     <tr>
+       <th>Code</th>
+       <th>Part no.</th>
+       <th>Quantity</th>
+     </tr>
+     <tr>
+   `
+     for(let i  = 0;i< result.rows.length  ; i++){
+      sendtext +=  `<td>${result.rows[i].code} </td>
+      <td>${result.rows[i].partno}</td>
+      <td>${result.rows[i].quantity}</td> `
+     }
+     sendtext += ' </tr>   </table> '
+
+   res.send(sendtext)
+     }
+   client.end()
+ })
+
+ })
   .listen(PORT, () => console.log(`Listening on ${ PORT }`));
